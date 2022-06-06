@@ -1,25 +1,25 @@
 import Chip from "./Chip";
+import { Tooltip } from "./Tooltip";
 
 type Props = {
-  course: {
-    id: string,
-    name: string,
-  }
+  name: string
 }
 
-const emoji = (courseName: string) => {
-  const map = {
+const emoji = (courseName: string): string => {
+  const emojiMap: Record<string, string> = {
     'Engenharia Eletrônica e de Computação': '📟',
     'Engenharia Mecânica': '⚙️',
     'Engenharia Elétrica': '⚡',
-  };
+  }
 
-  return map[courseName] || '';
+  return emojiMap[courseName] ?? '❓';
 }
 
-const CourseChip = ({ course }: Props) => {
+const CourseChip = ({ name }: Props) => {
   return (
-    <Chip>{ emoji(course.name) }</Chip>
+    <Tooltip message={name}>
+      <Chip>{ emoji(name) }</Chip>
+    </Tooltip>
   )
 }
 
