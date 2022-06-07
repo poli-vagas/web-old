@@ -2,7 +2,8 @@ import { ReactNode } from "react";
 
 type ButtonProps = {
   children: ReactNode,
-  url: string,
+  url?: string,
+  onClick: () => void,
   backgroundColor?: string,
   backgroundColorHover?: string,
   target?: 'self' | 'blank',
@@ -23,7 +24,12 @@ const Button = (props: ButtonProps) => {
   const targetHtml = targetMap[target];
 
   return (
-    <a className={buttonClass} href={props.url} target={targetHtml}>
+    <a
+      className={buttonClass}
+      href={props.url}
+      target={targetHtml}
+      onClick={props.onClick}
+    >
       { props.children }
     </a>
   );
