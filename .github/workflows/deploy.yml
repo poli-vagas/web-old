@@ -18,6 +18,9 @@ jobs:
           npm run build
           npm run export
 
+      - name: Include _next folder
+        run: touch ./out/.nojekyll
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
