@@ -1,13 +1,13 @@
-import { useAuthUser, withAuthUser,  } from 'next-firebase-auth';
 import { Tooltip } from './Tooltip';
 import Router from 'next/router';
 import Link from 'next/link';
+import { getAuth, signOut } from 'firebase/auth';
 
 const Navbar = () => {
-  var user = useAuthUser();
+  var user = getAuth().currentUser;
 
   const logout = async () => {
-    await user.signOut();
+    await signOut(getAuth());
 
     Router.push("/");
   }
@@ -19,7 +19,7 @@ const Navbar = () => {
           <span className="text-xl font-semibold mr-10">
             <Link href="/">Poli Vagas</Link>
           </span>
-          { user.id && <>
+          { user && <>
             <span className="text-md font-normal mr-5">
               <Link href="/add-company">Nova empresa</Link>
             </span>
@@ -31,11 +31,11 @@ const Navbar = () => {
         {/* <a href="/" className="flex items-center">
           <span className="self-center text-xl font-semibold whitespace-nowrap">Poli Vagas</span>
         </a> */}
-        { user.id === null &&
+        { user === null &&
           <Link href="/login">Login</Link>
           // <a href="#" onClick={login}>Login</a>
         }
-        { user.id &&
+        { user &&
           <div className="flex">
             <span className="hidden md:block">👤 {user.email}</span>
             <Tooltip message="Logout" position="bottom">
@@ -48,4 +48,4 @@ const Navbar = () => {
   )
 }
 
-export default withAuthUser()(Navbar);
+export default Navbar;

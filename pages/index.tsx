@@ -1,4 +1,3 @@
-import { withAuthUser } from "next-firebase-auth";
 import { useEffect, useState } from "react"
 import Job from "../components/Job"
 import { CompanyData, fetchCompanies } from "../services/company";
@@ -48,4 +47,4 @@ const Home = () => {
   )
 }
 
-export default withAuthUser()(Home)
+export default Home;

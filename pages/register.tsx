@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAuthUser, withAuthUser,  } from 'next-firebase-auth';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import Button from "../components/Button";
 import Router from "next/router";
@@ -7,8 +6,8 @@ import LoadingSpin from "../components/LoadingSpin";
 import Link from "next/link";
 
 const Register = () => {
-  var user = useAuthUser();
-  if (user.id) {
+  var user = getAuth().currentUser;
+  if (user !== null) {
     Router.push("/");
   }
 
@@ -82,4 +81,4 @@ const Register = () => {
   )
 }
 
-export default withAuthUser()(Register);
+export default Register;
