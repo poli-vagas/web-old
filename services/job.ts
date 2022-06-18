@@ -1,4 +1,5 @@
 import axios from "axios";
+import host from "./host";
 
 export type JobData = {
   id: string,
@@ -39,7 +40,7 @@ export type JobInput = {
 
 export const fetchJobs = (): Promise<JobData[]> => {
   return axios
-    .get('http://localhost:3000/jobs')
+    .get(`${host}/jobs`)
     .then(response => response.data);
 }
 
@@ -69,7 +70,7 @@ export const addJob = (job: JobInput): Promise<string> => {
   }
 
   return axios
-    .post('http://localhost:3000/jobs', job)
+    .post(`${host}/jobs`, job)
     .then(response => response.data.id)
     .catch(error => { throw error.response.data.message });
 }
