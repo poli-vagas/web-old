@@ -1,5 +1,6 @@
-import { withAuthUser } from "next-firebase-auth";
+import { useAuthUser, withAuthUser } from "next-firebase-auth";
 import { useState } from "react";
+import AccessDeniedCard from "../components/AccessDeniedCard";
 import Button from "../components/Button";
 import LoadingSpin from "../components/LoadingSpin";
 import { addCompany, CompanyInput } from "../services/company";
@@ -20,6 +21,11 @@ const AddCompany = () => {
 
   const changeWebsite = (e: React.FormEvent<HTMLInputElement>) => {
     setWebsite(e.currentTarget.value);
+  }
+
+  var user = useAuthUser();
+  if (user.id === null) {
+    return <AccessDeniedCard/>
   }
 
   const registerCompany = () => {

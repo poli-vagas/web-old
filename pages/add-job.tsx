@@ -1,10 +1,11 @@
-import { withAuthUser } from "next-firebase-auth";
+import { useAuthUser, withAuthUser } from "next-firebase-auth";
 import React, { useEffect, useState } from "react";
 import CurrencyInput from "react-currency-input-field";
 import Select from "react-select";
+import AccessDeniedCard from "../components/AccessDeniedCard";
 import Button from "../components/Button";
 import LoadingSpin from "../components/LoadingSpin";
-import { addCompany, CompanyData, CompanyInput, fetchCompanies } from "../services/company";
+import { CompanyData, fetchCompanies } from "../services/company";
 import { addJob } from "../services/job";
 
 type StatusType = 'pending' | 'loading' | 'success' | 'failed';
@@ -31,6 +32,11 @@ const AddJob = () => {
   useEffect(() => {
     fetchCompanies().then(c => { setCompanies(c); });
   }, []);
+
+  var user = useAuthUser();
+  if (user.id === null) {
+    return <AccessDeniedCard/>
+  }
 
   const availableTypes = ['Iniciação Científica', 'Estágio', 'Trainee', 'Emprego'];
 
@@ -100,7 +106,6 @@ const AddJob = () => {
       salary: parsedSalary,
       workspace,
     };
-    console.log(job);
     addJob(job)
       .then(() => { setStatus('success'); })
       .catch((errorMessage) => {
@@ -256,7 +261,7 @@ const AddJob = () => {
         <p className="text-red-500 text-sm my-1 text-center">{ error }</p>
         {
           status === 'success' &&
-          <p className="text-green-500 text-sm my-1 text-center">Empresa registrada.</p>
+          <p className="text-green-500 text-sm my-1 text-center">Vaga registrada.</p>
         }
       </form>
     </div>
