@@ -1,7 +1,7 @@
-import { useAuthUser, withAuthUser } from "next-firebase-auth";
 import React, { useEffect, useState } from "react";
 import CurrencyInput from "react-currency-input-field";
 import Select from "react-select";
+import { getAuth } from "firebase/auth";
 import AccessDeniedCard from "../components/AccessDeniedCard";
 import Button from "../components/Button";
 import LoadingSpin from "../components/LoadingSpin";
@@ -33,8 +33,8 @@ const AddJob = () => {
     fetchCompanies().then(c => { setCompanies(c); });
   }, []);
 
-  var user = useAuthUser();
-  if (user.id === null) {
+  var user = getAuth().currentUser;
+  if (user === null) {
     return <AccessDeniedCard/>
   }
 
@@ -268,4 +268,4 @@ const AddJob = () => {
   )
 };
 
-export default withAuthUser()(AddJob)
+export default AddJob;

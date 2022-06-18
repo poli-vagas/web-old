@@ -1,4 +1,4 @@
-import { useAuthUser, withAuthUser } from "next-firebase-auth";
+import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import AccessDeniedCard from "../components/AccessDeniedCard";
 import Button from "../components/Button";
@@ -23,8 +23,8 @@ const AddCompany = () => {
     setWebsite(e.currentTarget.value);
   }
 
-  var user = useAuthUser();
-  if (user.id === null) {
+  var user = getAuth().currentUser;
+  if (user === null) {
     return <AccessDeniedCard/>
   }
 
@@ -89,4 +89,4 @@ const AddCompany = () => {
   )
 };
 
-export default withAuthUser()(AddCompany)
+export default AddCompany;
