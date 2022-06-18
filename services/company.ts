@@ -18,6 +18,10 @@ export const fetchCompanies = (): Promise<CompanyData[]> => {
 }
 
 export const addCompany = (company: CompanyInput): Promise<string> => {
+  if (company.website?.length === 0) {
+    delete company.website;
+  }
+
   return axios
     .post('http://localhost:3000/companies', company)
     .then(response => response.data.id)

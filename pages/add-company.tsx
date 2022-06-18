@@ -33,10 +33,7 @@ const AddCompany = () => {
       return;
     }
 
-    const company: CompanyInput = { name };
-    if (website.length !== 0) {
-      company.website = website;
-    }
+    const company: CompanyInput = { name, website };
 
     addCompany(company)
       .then(() => { setStatus('success'); })
