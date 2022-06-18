@@ -1,4 +1,5 @@
 import axios from "axios";
+import host from "./host";
 
 export type CompanyData = {
   id: string,
@@ -13,7 +14,7 @@ export type CompanyInput = {
 
 export const fetchCompanies = (): Promise<CompanyData[]> => {
   return axios
-    .get('http://localhost:3000/companies')
+    .get(`${host}/companies`)
     .then(response => response.data);
 }
 
@@ -23,7 +24,7 @@ export const addCompany = (company: CompanyInput): Promise<string> => {
   }
 
   return axios
-    .post('http://localhost:3000/companies', company)
+    .post(`${host}/companies`, company)
     .then(response => response.data.id)
     .catch(error => { throw error.response.data.message; });
 }
