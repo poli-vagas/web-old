@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 type ButtonProps = {
   children: ReactNode,
   url?: string,
-  onClick: () => void,
+  onClick?: () => void,
   backgroundColor?: string,
   backgroundColorHover?: string,
   target?: 'self' | 'blank',
