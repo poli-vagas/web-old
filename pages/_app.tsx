@@ -3,8 +3,10 @@ import type { AppProps } from 'next/app'
 import { initAuth } from '../services/firebase'
 import Navbar from '../components/Navbar';
 import Head from 'next/head';
+import { initApi } from '../services/api';
 
 initAuth();
+initApi(process.env.NEXT_PUBLIC_API || 'https://poli-vagas-api.herokuapp.com');
 
 const PoliVagas = ({ Component, pageProps }: AppProps) => {
   return (<>
