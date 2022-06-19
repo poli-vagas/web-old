@@ -1,3 +1,3 @@
-const host = process.env.NEXT_PUBLIC_API || "http://localhost:3000";
+const host = process.env.NEXT_PUBLIC_API || "https://poli-vagas-api.herokuapp.com";
 
 export default host;
