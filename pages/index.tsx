@@ -40,6 +40,7 @@ const Home = () => {
           hoursPerWeek={job.hoursPerWeek}
           salary={job.salary}
           company={company}
+          createdAt={new Date(job.createdAt)}
         />
       })}
     </div>

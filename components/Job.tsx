@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { timeSince } from "../services/time-since";
 import Chip from "./Chip";
 import CourseChip from "./CourseChip";
 import HoursPerWeekChip from "./HoursPerWeekChip";
@@ -26,6 +27,7 @@ type JobProps = {
     id: string,
     name: string,
   },
+  createdAt: Date,
 };
 
 const Job = (props: JobProps) => {
@@ -84,7 +86,7 @@ const Job = (props: JobProps) => {
         ))}
       </div>
       <div className="w-2/12 md:w-1/12 my-auto text-right font-thin text-sm mr-4">
-        2h
+        { timeSince(props.createdAt) }
       </div>
     </div>
     { open &&
