@@ -19,6 +19,7 @@ export type JobData = {
   workspace: string | null,
   hoursPerWeek: number | null,
   salary: number | null,
+  createdAt: string,
 }
 
 export type JobInput = {
