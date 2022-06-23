@@ -4,16 +4,28 @@ import { CompanyData, fetchCompanies } from "../services/company";
 import { fetchJobs, JobData } from "../services/job";
 
 const Home = () => {
-  const [jobs, setJobs] = useState<JobData[]>([]);
-  const [companies, setCompanies] = useState<CompanyData[]>([]);
+  const [jobs, setJobs] = useState<JobData[]|null>(null);
+  const [companies, setCompanies] = useState<CompanyData[]|null>(null);
 
   useEffect(() => {
     fetchJobs().then(j => { setJobs(j); });
     fetchCompanies().then(c => { setCompanies(c); });
   }, []);
 
-  if (jobs.length === 0 || companies.length === 0) {
-    return (<p>Loading</p>);
+  if (!jobs || !companies) {
+    return (
+      <p className="text-center">
+        Carregando...
+      </p>
+    );
+  }
+
+  if (jobs.length === 0) {
+    return (
+      <p className="text-center">
+        Ainda não há vagas registradas.
+      </p>
+    )
   }
 
   return (
